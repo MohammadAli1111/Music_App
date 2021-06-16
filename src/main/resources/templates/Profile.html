@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="AdminLayout/Head">
+
+</head>
+
+<body >
+
+<div id="wrapper" >
+    <div id="sidebar-wrapper" style="background: rgba(102,16,242,0.44);">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand"> <a class="text-left" href="/" style="border-style: solid;border-top-width: 0px;border-right-width: 0px;border-bottom-width: 1px;border-left-width: 0px;">Home <i class="fa fa-home" style="font-size: 30px;"></i></a></li>
+            <li> <a href="/table">Table<i class="fa fa-table" style="font-size: 20px;"></i></a></li>
+            <li> <a href="/profile">Profile<i class="fa fa-user" style="font-size: 20px;"></i></a></li>
+            <li> <a href="/users">Users<i class="fa fa-users" style="font-size: 20px;"></i></a></li>
+        </ul>
+    </div>
+    <div  class="page-content-wrapper">
+        <div class="container-fluid"><a class="btn btn-link" role="button" id="menu-toggle" href="#menu-toggle"><i class="fa fa-bars" style="font-size: 30px;margin: 0px;margin-top: 0px;color: rgba(102,16,242,0.73);"></i></a>
+
+            <div class="row" style="margin: 0px;">
+        <div class="col-sm-12">
+            <h1 style="color: rgb(255,255,255);">Profile&nbsp;</h1>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-box">
+                <form method="post" action="/profile" th:object="${user}" enctype="multipart/form-data">
+                    <fieldset style="text-align: center;">
+                        <div class="file-upload"  style="color: rgb(255,255,255);">
+                            <img id="Idimge" class="avatar round" th:src="@{${'/Image'}}" src="img/music.jpg" style="width: 100px;height: 100px;">
+                            <i class="fa fa-upload"></i>
+                            <input id="Idfile" class="form-control-file" type="file" onchange="readURLAdmin();" style="margin-bottom: 9px;" accept="image/jpeg" name="fileAdmin">
+                        </div>
+                        <input type="number" hidden="hidden" name="id" th:field="*{id}">
+                        <label class="d-flex" style="color: rgb(255,255,255);">User Name:</label>
+                        <input class="form-control" type="text" th:field="*{username}" id="username" name="username" placeholder="username" required="">
+
+                        <label class="d-flex" style="color: rgb(255,255,255);">Email:</label>
+                        <input class="form-control" type="email" th:field="*{email}" id="email" name="email" placeholder="Email" required="">
+
+                        <label class="d-flex" style="color: rgb(255,255,255);">Password:</label>
+                        <input class="form-control" type="password" th:field="*{password}" id="password" name="password" placeholder="password" required="">
+
+                        <button class="btn btn-primary btn-block" value="Save" name="save" type="submit">Save</button>
+
+                        <hr style="color: rgb(255,255,255);background: #ffffff;">
+
+                        <button class="btn btn-danger btn-block" type="submit" name="delete" value="Delete" style="background: var(--red);">Delete</button>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/bs-init.js"></script>
+    <script src="js/Sidebar-Menu.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

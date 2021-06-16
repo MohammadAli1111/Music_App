@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="Layout/Head">
+</head>
+
+<body >
+
+<!-- Header -->
+<header th:replace="Layout/Header" ></header>
+
+
+    <main>
+        <div class="container" style="background: radial-gradient(black, rgba(102,16,242,0.44));border-radius: 30px;box-shadow: inset 2px 2px 4px 1px var(--purple);padding-top: 5px;">
+            <div class="row" style="border-radius: 30px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;">
+               
+			   <div class="col-md-12" style="text-align: center;">
+					<label id="title" style="text-align: center;color: rgb(255,255,255);">Music Name:&nbsp;</label><i class="fa fa-music" style="color: rgb(255,0,0);font-size: 20px;"></i>
+				</div>
+            
+				<div class="col-md-12" style="text-align: center;">
+					<img class="rounded-circle pulse animated infinite" style="width: 250px;height: 149px;box-shadow: 3px 3px 5px 0px var(--purple);" src="img/music.jpg">
+				</div>
+                
+				<div class="col-md-12" style="text-align: center;">
+					<input type="range" class="seek_slider" onchange="seekTo()" style="margin-top: 20px;width: 250px;filter: hue-rotate(140deg) saturate(200%);" max="100" min="0" value="0">
+					<label class="current-time" style="margin-right: 9px;margin-left: 9px;color: rgb(255,255,255);">00:00</label>
+				</div>
+				
+                <!-- Buttons -->
+				<div class="col-md-12" style="text-align: center;">
+					<button class="btn btn-primary" type="button" onclick="prevTrack()" style="border-radius: 30px;background: rgba(126,9,2,0.7);border-color: var(--red);margin: 4px;"><i class="fa fa-step-backward"></i></button>
+					<button class="btn btn-primary" type="button" onclick="stop()" style="border-radius: 30px;background: rgba(126,9,2,0.7);border-color: var(--red);margin: 4px;"><i class="fa fa-stop"></i></button>
+					<button class="btn btn-primary" id="playpause-track" type="button" onclick="playpauseTrack()" style="border-radius: 30px;background: rgba(126,9,2,0.7);border-color: var(--red);margin: 4px;"><i class="fa fa-play"></i></button>
+					<button class="btn btn-primary" type="button" onclick="nextTrack()" style="background: rgba(126,9,2,0.7);border-radius: 30px;border-color: var(--red);margin: 4px;"><i class="fa fa-step-forward"></i></button>
+                     <i class="fa fa-volume-down"  style="color: var(--white); font-size: 18px;margin: 3px;"></i>
+					<input type="range" class="volume_slider" onchange="setVolume()"  style="margin-top: 20px;width:100px;filter: hue-rotate(140deg) saturate(200%);" max="100" min="0" value="100">
+					<i class="fa fa-volume-up"  style="color: var(--white);font-size: 18px;margin: 3px;"></i>
+                    
+				</div>
+				<div class="col-md-12" style="text-align: center;">
+                   
+				</div>
+                
+            </div>
+			
+            <div class="row">
+
+                <div  class="col-md-12" th:each="music : ${list}" data-bss-hover-animate="flash">
+				<p class="path" th:id="${music.id}" th:onclick="'javascript:selectfromList(\'' + ${music.id} + '\');'"
+				   th:text="${music.title}" style="display: inline;color: var(--white);"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-music-note-list" style="color: #ff0119;margin: 3px;">
+                            <path d="M12 13c0 1.105-1.12 2-2.5 2S7 14.105 7 13s1.12-2 2.5-2 2.5.895 2.5 2z"></path>
+                            <path fill-rule="evenodd" d="M12 3v10h-1V3h1z"></path>
+                            <path d="M11 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 16 2.22V4l-5 1V2.82z"></path>
+                            <path fill-rule="evenodd" d="M0 11.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 7H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 3H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"></path>
+                        </svg>
+					Music&nbsp;Name:</p>
+
+
+					<form method="get" action="/updateMusic" enctype="multipart/form-data" style="display: inline">
+						<input type="number" hidden="hidden" name="id" th:value="${music.id}">
+
+						<a th:href="@{${'/users/download/' + music.id}}" class="btn btn-link"><i class="fa fa-download" style="color: rgb(214,0,0);font-size: 18px;margin: 3px;"></i></a>
+
+						<button type="submit" class="btn btn-link" ><i class="fa fa-edit" style="color: rgb(214,0,0);font-size: 18px;margin: 3px;"></i></button>
+
+						<a class="btn btn-link"  th:href="@{${'/delete/' + music.id}}"><i class="fa fa-trash-o" style="color: rgb(214,0,0);font-size: 18px;margin: 3px;"></i></a>
+					</form>
+                    <hr style="color: rgb(33, 37, 41);background: #606060;">
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+<!-- Footer -->
+<footer th:replace="Layout/Footer" ></footer>
+
+
+<script src="js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/bs-init.js"></script>
+	<!-- Load the main script for the player -->
+  <script src="js/main.js"></script>
+</body>
+
+</html>

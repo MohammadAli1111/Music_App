@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="Layout/Head">
+
+</head>
+
+<body>
+    <div class="container bounce animated" style="background: radial-gradient(black, rgba(111,66,193,0.3));border-radius: 30px;padding-top: 5px;padding-bottom: 6px;">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <img class="rounded-circle" name="Image"  accept="image/jpeg" src="img/music.jpg" id="Idimge" style="width: 200px;height: 150px;">
+
+                <form method="post" action="/signup" th:object="${user}" enctype="multipart/form-data">
+                    <div class="form-group" style="margin-top: 19px;">
+                        
+                        <label class="float-left" style="color: rgb(255,255,255);margin-top: 1px;">Image:</label>
+                        <input class="form-control-file" type="file" onchange="readURL(this);" style="margin-top: 0px;color: rgb(255,255,255);" required="" accept="image/jpeg"   name="img">
+                        
+                        <label class="float-left" style="color: rgb(255,255,255);">UserName:</label>
+                        <input class="form-control" th:field="*{username}" type="text" placeholder="UserName" name="username" required="">
+                        
+                        <label class="float-left" style="color: rgb(255,255,255);">Email:</label>
+                        <input class="form-control" th:field="*{email}" type="email" placeholder="Email" name="email" required="">
+                        
+                        <label class="float-left" style="color: rgb(255,255,255);">Password:</label>
+                        <input class="form-control" th:field="*{password}" type="password" placeholder="Password" name="password" required="">
+                       
+                        <button class="btn btn-primary border rounded-pill w-25" type="submit" style="margin-top: 5px;background: rgba(102,16,242,0.44);border-color: rgba(102,16,242,0.75);">Sign Up</button>
+                
+                    </div>
+                    
+                    <hr style="background: #ffffff;">
+                    <p style="color: rgb(255,255,255);">Have an account?&nbsp;<a href="/login">Login</a></p>
+                
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/bs-init.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

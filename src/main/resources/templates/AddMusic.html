@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="Layout/Head">
+
+</head>
+
+<body style="background: #1d1232;">
+    <div class="container bounce animated" style="background: radial-gradient(black, rgba(111,66,193,0.3));border-radius: 30px;padding-top: 5px;padding-bottom: 6px;">
+        <div class="row text-center">
+            <div class="col-md-12"><i class="fas fa-music d-flex d-md-flex justify-content-center justify-content-md-center pulse animated infinite" style="color: rgb(255,0,0);font-size: 100px;margin-top: 10px;margin-bottom: 3px;"></i>
+                <form action="/addMusic" th:object="${music}" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="float-left" style="color: rgb(255,255,255);">Music Title:</label>
+                        <input class="form-control" th:field="*{title}" type="text" placeholder="Music Title" name="musicname" required="">
+
+                        <label class="float-left" style="color: rgb(255,255,255);">Music UpLoad:</label>
+                        <input class="form-control-file" type="file" style="color: rgb(248,248,248);" name="fileMusic" accept="audio/*" required="">
+
+                        <label class="float-left" style="color: rgb(255,255,255);">Select Category:</label>
+                        <select class="form-control" name="category" th:field="*{category}" style="background: rgba(135,76,242,0.75);color: rgb(255,255,255);">
+                            <optgroup label="Select Category">
+                                <option value="Love">Love</option>
+                                <option value="Sadnes">Sadnes</option>
+                                <option value="Joy">Joy</option>
+                            </optgroup>
+                        </select>
+
+                        <button class="btn btn-primary border rounded-pill w-25" type="submit" style="margin-top: 5px;background: rgba(102,16,242,0.44);border-color: rgba(102,16,242,0.75);">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/bs-init.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+body{
+  background: #2a1a48;
+}
+.file-upload {
+  height: 140px;
+  width: 100px;
+  margin: 40px auto;
+  border-radius: 100px;
+  overflow: hidden;
+  position: relative;
+}
+
+.file-upload input {
+  position: absolute;
+  height: 400px;
+  width: 400px;
+  left: -200px;
+  top: -200px;
+  background: transparent;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+}
+
+.path{
+  cursor: pointer;
+}

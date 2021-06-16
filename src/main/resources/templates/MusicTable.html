@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="AdminLayout/Head">
+
+</head>
+
+<body>
+
+<div id="wrapper" >
+    <div id="sidebar-wrapper" style="background: rgba(102,16,242,0.44);">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand"> <a class="text-left" href="/" style="border-style: solid;border-top-width: 0px;border-right-width: 0px;border-bottom-width: 1px;border-left-width: 0px;">Home <i class="fa fa-home" style="font-size: 30px;"></i></a></li>
+            <li> <a href="/table">Table<i class="fa fa-table" style="font-size: 20px;"></i></a></li>
+            <li> <a href="/profile">Profile<i class="fa fa-user" style="font-size: 20px;"></i></a></li>
+            <li> <a href="/users">Users<i class="fa fa-users" style="font-size: 20px;"></i></a></li>
+        </ul>
+    </div>
+    <div  class="page-content-wrapper">
+        <div class="container-fluid"><a class="btn btn-link" role="button" id="menu-toggle" href="#menu-toggle"><i class="fa fa-bars" style="font-size: 30px;margin: 0px;margin-top: 0px;color: rgba(102,16,242,0.73);"></i></a>
+            <div class="row" style="margin: 0px;">
+                <div class="col">
+                    <h1 style="color: rgb(255,255,255);">Music Table For Display</h1>
+                </div>
+
+                <div class="col-md-12 search-table-col" style="padding-right: 0px;padding-left: 0px;">
+                    <div class="form-group pull-left col-lg-4" style="padding-right: 0px;padding-left: 0px;margin-bottom: 10px;">
+                        <form class="form-inline mr-auto" target="_self">
+                        <input type="search" name="search" class="search form-control" placeholder="Search by music title" style="border-radius: 12px;border-bottom-width: 1px;border-bottom-style: solid;">
+                        </form>
+                    </div>
+
+                    <div class="table-responsive table-bordered table table-hover table-bordered results" style="border-width: 0px;">
+
+                        <table class="table table-bordered table-hover">
+                            <thead class="bill-header cs" style="background: rgba(193,179,215,0.44);">
+                            <tr>
+                                <th id="trs-hd0" class="col-lg-1"># ID</th>
+                                <th id="trs-hd1" class="col-lg-2">User Name</th>
+                                <th id="trs-hd2" class="col-lg-3">Music Title</th>
+                                <th id="trs-hd3" class="col-lg-2">Music Category</th>
+                                <th id="trs-hd4" class="col-lg-2">Action</th>
+                            </tr>
+                            </thead>
+
+                            <tbody  style="color: rgb(255,255,255);">
+                            <tr th:each="music:${list}" >
+                                <td  th:text="${music.id}">01</td>
+                                <td th:text="${music.user.username}">Username</td>
+                                <td th:text="${music.title}">Music Title</td>
+                                <td th:text="${music.category}">Music Category</td>
+                                <td>
+
+                                    <a class="btn btn-success" th:href="@{${'/check/' + music.id}}" style="margin-left: 5px;">
+                                        <i class="fa fa-check" style="font-size: 15px;"></i></a>
+
+                                    <a class="btn btn-danger" th:href="@{${'/delete/music/' + music.id}}" style="margin-left: 5px;" >
+                                        <i class="fa fa-trash" style="font-size: 15px;"></i></a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="js/jquery.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="js/bs-init.js"></script>
+<script src="js/Sidebar-Menu.js"></script>
+</body>
+</html>
